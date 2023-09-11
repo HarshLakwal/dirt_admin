@@ -22,7 +22,7 @@ const Login = () => {
       localStorage.removeItem("adminPassword");
     }
     try {
-      fetch(`${server}/login`, {
+      fetch(`https://dirt-backend.onrender.com/api/user/admin-login`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +33,8 @@ const Login = () => {
           return res.json();
         })
         .then((res) => {
-          if (res.admin && res.admin.role === "Admin") {
+          console.log(res)
+          if (res.admin ) {
             localStorage.setItem("adminRole", res.admin.role);
             localStorage.setItem("adminToken", res.admin.adminToken);
             navigate("/admin/dashboard");
