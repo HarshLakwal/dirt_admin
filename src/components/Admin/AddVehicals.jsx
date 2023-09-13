@@ -42,7 +42,6 @@ const AddVehicals = () => {
         newVehical.splice(index, 1);
         setVehicals(newVehical);
     };
-console.log(vehicalCategory)
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

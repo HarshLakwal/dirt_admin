@@ -3,6 +3,7 @@ import authSlice from "./authSlice.js";
 import userSlice from "./userSlice.js";
 import { kidsSlice, seriesSlice } from "./videosSlice.js"
 import { codeSlice, getCodesSlice } from "./codeSlice.js";
+import vehicalSlice from "./vehicalSlice.js";
 
 
 
@@ -11,13 +12,8 @@ const Store = configureStore({
     admin: authSlice,
     users: userSlice,
     codes: codeSlice,
-    getcodes: getCodesSlice
-    // seller: sellerReducer,
-    // products: productReducer,
-    // events: eventReducer,
-    // cart: cartReducer,
-    // wishlist: wishlistReducer,
-    // order: orderReducer,
+    getcodes: getCodesSlice,
+    vehical:vehicalSlice
   },
 });
 

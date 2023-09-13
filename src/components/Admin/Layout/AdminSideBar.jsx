@@ -72,7 +72,7 @@ const AdminSideBar = ({ active }) => {
             className={`hidden 800px:block pl-2 text-[18px] font-[400] ${active === 4 ? "text-[#8DD253]" : "text-[#555]"
               }`}
           >
-            Add Vehicals
+            Vehicals
           </h5>
         </Link>
       </div>

@@ -16,7 +16,8 @@ import {
   AdminDashboardUsers,
 
   AdmimDashboardGenerateCode,
-  AdminDashboardAddVehicals
+  AdminDashboardAddVehicals,
+  AdminDashboardVehicals
 } from "./routes/AdminRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -91,7 +92,7 @@ const App = () => {
           path="admin/add-vehicals"
           element={
             // <ProtectedAdminRoute>
-              < AdminDashboardAddVehicals/>
+              < AdminDashboardVehicals/>
             // </ProtectedAdminRoute>
           }
         />

@@ -53,25 +53,6 @@ const AllUsers = () => {
       minWidth: 40,
       flex: 0.5,
     },
-
-    // {
-    //   field: "  ",
-    //   flex: 1,
-    //   minWidth: 10,
-    //   headerName: "View User",
-    //   sortable: false,
-    //   renderCell: (params) => {
-    //     return (
-    //       <>
-    //         <Link to={`/shop/preview/${params.id}`}>
-    //           <Button>
-    //             <AiOutlineEye size={20} />
-    //           </Button>
-    //         </Link>
-    //       </>
-    //     );
-    //   },
-    // },
     {
       field: " ",
       flex: 0.7,

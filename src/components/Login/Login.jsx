@@ -33,7 +33,6 @@ const Login = () => {
           return res.json();
         })
         .then((res) => {
-          console.log(res)
           if (res.admin ) {
             localStorage.setItem("adminRole", res.admin.role);
             localStorage.setItem("adminToken", res.admin.adminToken);
