@@ -1,58 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { RxCross1 } from 'react-icons/rx'
-import { useDispatch, useSelector } from 'react-redux'
-import { server } from '../server.js'
-import { Link, useParams } from 'react-router-dom'
-import axios from 'axios'
-import moment from 'moment'
-import { getAllCodes } from '../redux/codeSlice.js'
-import { toast } from 'react-toastify'
-import styles from '../styles/styles.js'
+import React from 'react'
 
-const PreviewUser = () => {
-    const dispatch = useDispatch()
-    const [open, setOpen] = useState(false)
-    const [user, setUser] = useState("")
-    const [code, setCode] = useState("")
-    const [assignCode, setAssignCode] = useState("")
-    const { id } = useParams()
-    useEffect(() => {
-        axios.get(`${server}/get-user/${id}`).then((res) => {
-            setUser(res.data.result)
-        })
-
-        dispatch(getAllCodes())
-    }, [id])
-
-    const handleCodeAssign = (e) => {
-        setCode(e.target.value)
-    }
-    const submit = async (e) => {
-        e.preventDefault()
-        let userId = user._id
-        axios.post(`${server}/assign-code`, { userId, code })
-            .then(response => {
-                toast.success(response.data.result) // Handle successful response
-                setOpen(false)
-            })
-            .catch(error => {
-                if (error.response) {
-                    toast.error(error.response.data.message)
-                } else {
-                    console.log(error.message);  // Handle other errors
-                }
-            });
-        setCode("")
-    }
-    useEffect(() => {
-        axios.get(`${server}/get-assigned-codes/${id}`).then((res) => {
-            setAssignCode(res.data.result.assignCode)
-        })
-    }, [submit])
-    const allCodes = useSelector((state) => state.getcodes)
-
+const UserDocument = () => {
     return (
-        <div className="container mx-auto">
+        <>
+            <div className="container mx-auto">
             <h3 className=" p-6 text-2xl text-start">User Details</h3>
 
             <div className="flex justify-center items-center h-fit px-6">
@@ -61,7 +12,7 @@ const PreviewUser = () => {
 
                     <div className="w-full lg:w-full bg-white p-5 rounded-lg lg:rounded-l-none  h-[27rem]">
                         <div className="text-center flex justify-end">
-                            <Link to="/admin/preview-user/:id/posts">
+                            <Link to="/user-document">
                                 <button class="w-40 px-2 py-2 rounded-full bg-blue-500 font-bold text-white rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="button" >
                                     View document
                                 </button>
@@ -166,7 +117,8 @@ const PreviewUser = () => {
                 </div>
             )}
         </div>
+        </>
     )
 }
 
-export default PreviewUser
+export default UserDocument

@@ -64,6 +64,7 @@ const App = () => {
        
         {/* Admin Routes */}
         <Route path="/admin/preview-user/:id" element={<AdminDashboardPreviewUser />} />
+        <Route path="/admin/preview-user/:id/view-document" element={<LoginPage />} />
         <Route
           path="/admin/dashboard"
           element={
@@ -96,7 +97,6 @@ const App = () => {
             // </ProtectedAdminRoute>
           }
         />
-        
         
         
       </Routes>
