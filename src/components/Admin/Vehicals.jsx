@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { server } from '../../server';
+import { imageURL, server } from '../../server';
 import { toast } from 'react-toastify';
 import { getVehicalByCategory } from '../../redux/vehicalSlice';
 import { RxCross1 } from 'react-icons/rx';
@@ -40,7 +40,7 @@ const Vehicals = () => {
             renderCell: (params) => {
                 return (
                     <>
-                        <img src={`http://localhost:8080/uploads/${params.row.img}`} alt="img" width={80} />
+                        <img src={`${imageURL}/${params.row.img}`} alt="img" width={80} />
                     </>
                 );
             },

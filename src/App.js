@@ -17,13 +17,16 @@ import {
 
   AdmimDashboardGenerateCode,
   AdminDashboardAddVehicals,
-  AdminDashboardVehicals
+  AdminDashboardVehicals,
+  AdminDashboardViewDocument,
+
 } from "./routes/AdminRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import ProtectedAdminRoute from "./routes/ProtectedAdminRoute";
 import AdminDashboardPreviewUser from "./pages/AdminDashboardPreviewUser";
+
 
 const App = () => {
   // const [stripeApikey, setStripeApiKey] = useState("");
@@ -64,7 +67,7 @@ const App = () => {
        
         {/* Admin Routes */}
         <Route path="/admin/preview-user/:id" element={<AdminDashboardPreviewUser />} />
-        <Route path="/admin/preview-user/:id/view-document" element={<LoginPage />} />
+        <Route path="/admin/preview-user/:id/view-document" element={<AdminDashboardViewDocument />} />
         <Route
           path="/admin/dashboard"
           element={

@@ -54,14 +54,11 @@ const PreviewUser = () => {
     return (
         <div className="container mx-auto">
             <h3 className=" p-6 text-2xl text-start">User Details</h3>
-
             <div className="flex justify-center items-center h-fit px-6">
-
                 <div className="w-full xl:w-full lg:w-full flex">
-
                     <div className="w-full lg:w-full bg-white p-5 rounded-lg lg:rounded-l-none  h-[27rem]">
                         <div className="text-center flex justify-end">
-                            <Link to="/admin/preview-user/:id/posts">
+                            <Link to={`/admin/preview-user/${id}/view-document`}>
                                 <button class="w-40 px-2 py-2 rounded-full bg-blue-500 font-bold text-white rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="button" >
                                     View document
                                 </button>

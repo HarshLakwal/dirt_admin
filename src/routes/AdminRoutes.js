@@ -7,6 +7,7 @@ import AdminDashboardUsers from "../pages/AdminDashboardUsers";
 import AdmimDashboardGenerateCode from "../pages/AdmimDashboardGenerateCode";
 import AdminDashboardAddVehicals from "../pages/AdminDashboardAddVehicals";
 import AdminDashboardVehicals from "../pages/AdminDashboardVehicals";
+import AdminDashboardViewDocument from "../pages/AdminDashboardViewDocument";
 
 export {
   AdminDashboardUsers,
@@ -15,4 +16,5 @@ export {
   AdmimDashboardGenerateCode,
   AdminDashboardAddVehicals,
   AdminDashboardVehicals,
+  AdminDashboardViewDocument
 };
