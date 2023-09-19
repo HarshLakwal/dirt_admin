@@ -17,17 +17,16 @@ const Vehicals = () => {
     const [open, setOpen] = useState(false);
     const [userId, setUserId] = useState("");
     const vehical = useSelector((state) => state.vehical);
-    console.log(selectCategory)
     useEffect(() => {
         dispatch(getVehicalByCategory(selectCategory));
     }, [selectCategory]);
 
     const handleDelete = async (id) => {
-        await axios
-            .get(`${server}/deactive-user/${id}`, { withCredentials: true })
-            .then((res) => {
-                toast.success(res.data.message);
-            });
+        // await axios
+        //     .get(`${server}/deactive-user/${id}`, { withCredentials: true })
+        //     .then((res) => {
+        //         toast.success(res.data.message);
+        //     });
     };
     const columns = [
         { field: "SNo", headerName: "SNo.", minWidth: 40, flex: 0.4 },
@@ -35,7 +34,7 @@ const Vehicals = () => {
             field: "img ",
             flex: 0.7,
             minWidth: 10,
-            headerName: "Action",
+            headerName: "Image",
             sortable: false,
             renderCell: (params) => {
                 return (
@@ -65,12 +64,13 @@ const Vehicals = () => {
             headerName: "Action",
             sortable: false,
             renderCell: (params) => {
+                console.log(params)
                 return (
                     <>
                         <Button onClick={() => setUserId(params.id) || setOpen(true)}>
                             <AiOutlineDelete size={20} />
                         </Button>
-                        <Link to={`/admin/preview-user/${params.id}`}>
+                        <Link to={`/admin/preview-vehical/${selectCategory}/${params.id}`}>
                             <Button>
                                 <AiOutlineEye size={20} />
                             </Button>
@@ -97,21 +97,29 @@ const Vehicals = () => {
             <div className="w-full flex justify-center pt-5">
                 <div className="w-[97%]">
                     <h3 className="text-[22px] font-Poppins pb-2">All Vehicals</h3>
-                    <div class="dropdown inline-block relative z-10 mb-4">
-                        <button class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
-                            <span class="mr-1">Dropdown</span>
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                            </svg>
-                        </button>
-                        <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
-                            <li class=""><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={(event) => setSelectCategory(event.target.textContent)}>UTVMavericks</a></li>
-                            <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={(event) => setSelectCategory(event.target.textContent)}>DirtBikes</a></li>
-                            <li class=""><a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={(event) => setSelectCategory(event.target.textContent)}>ATVRaptors</a></li>
-                            <li class=""><a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={(event) => setSelectCategory(event.target.textContent)}>UTVPolaris</a></li>
-                        </ul>
+                    <div className='flex justify-between'>
+                        <div class="dropdown  relative z-10 mb-4">
+                            <button class="bg-gray-300  text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+                                <span class="mr-1">Dropdown</span>
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+                                <li class=""><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={(event) => setSelectCategory(event.target.textContent)}>UTVMavericks</a></li>
+                                <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={(event) => setSelectCategory(event.target.textContent)}>DirtBikes</a></li>
+                                <li class=""><a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={(event) => setSelectCategory(event.target.textContent)}>ATVRaptors</a></li>
+                                <li class=""><a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={(event) => setSelectCategory(event.target.textContent)}>UTVPolaris</a></li>
+                            </ul>
+                        </div>
+                        <Link to="/admin/add-vehicals">
+                            <button class="bg-gray-300 h-[2.5rem] text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+                                <span class="mr-1">Add Vehicals</span>
+                            </button>
+                        </Link>
 
                     </div>
+
                     <div className="w-full min-h-[45vh] bg-white rounded">
                         <DataGrid
                             rows={row}
@@ -128,7 +136,7 @@ const Vehicals = () => {
                                     <RxCross1 size={25} onClick={() => setOpen(false)} />
                                 </div>
                                 <h3 className="text-[25px] text-center py-5 font-Poppins text-[#000000cb]">
-                                    Are you sure you wanna delete this user?
+                                    Are you sure you wanna delete this vehical?
                                 </h3>
                                 <div className="w-full flex items-center justify-center">
                                     <div

@@ -19,6 +19,7 @@ import {
   AdminDashboardAddVehicals,
   AdminDashboardVehicals,
   AdminDashboardViewDocument,
+  AdminDashboardPreviewVehical,
 
 } from "./routes/AdminRoutes";
 import { ToastContainer } from "react-toastify";
@@ -93,14 +94,29 @@ const App = () => {
           }
         />
        <Route
-          path="admin/add-vehicals"
+          path="/admin/vehicals"
           element={
             // <ProtectedAdminRoute>
               < AdminDashboardVehicals/>
             // </ProtectedAdminRoute>
           }
         />
-        
+         <Route
+          path="admin/add-vehicals"
+          element={
+            // <ProtectedAdminRoute>
+              < AdminDashboardAddVehicals/>
+            // </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/preview-vehical/:category/:id"
+          element={
+            // <ProtectedAdminRoute>
+              < AdminDashboardPreviewVehical/>
+            // </ProtectedAdminRoute>
+          }
+        />
         
       </Routes>
       <ToastContainer

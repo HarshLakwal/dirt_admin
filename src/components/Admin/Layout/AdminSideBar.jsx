@@ -61,7 +61,7 @@ const AdminSideBar = ({ active }) => {
       </div>
       <div className="w-full flex items-center p-4">
         <Link
-          to="/admin/add-vehicals"
+          to="/admin/vehicals"
           className="w-full flex items-center"
         >
           <AiOutlineCar

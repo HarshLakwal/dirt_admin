@@ -1,9 +1,9 @@
 import React from 'react'
 import AdminHeader from '../components/Layout/AdminHeader'
 import AdminSideBar from '../components/Admin/Layout/AdminSideBar'
-import Vehicals from '../components/Admin/Vehicals'
+import PreviewVehical from './PreviewVehical'
 
-const AdminDashboardVehicals = () => {
+const AdminDashboardPreviewVehical = () => {
     return (
         <>
             <div>
@@ -13,7 +13,7 @@ const AdminDashboardVehicals = () => {
                         <div className="w-[80px] 800px:w-[330px]">
                             <AdminSideBar active={4} />
                         </div>
-                       <Vehicals/>
+                        <PreviewVehical />
                     </div>
                 </div>
             </div>
@@ -21,4 +21,4 @@ const AdminDashboardVehicals = () => {
     )
 }
 
-export default AdminDashboardVehicals
+export default AdminDashboardPreviewVehical
