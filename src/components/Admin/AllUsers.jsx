@@ -6,11 +6,28 @@ import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import { Button } from "@material-ui/core";
 import styles from "../../styles/styles";
 import { RxCross1 } from "react-icons/rx";
+import { FcApproval, FcCancel } from 'react-icons/fc'
+import { makeStyles } from '@material-ui/core'
 import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 import { getAllUsers } from "../../redux/userSlice.js";
 import moment from "moment/moment";
+const useStyles = makeStyles({
+  header: {
+    '& .MuiDataGrid-columnHeaderTitleContainer': {
+      justifyContent: 'center'
+    },
+    '& .MuiDataGrid-cell': {
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    '& .MuiDataGrid-root .MuiDataGrid-cell--textLeft.MuiDataGrid-cell--withRenderer': {
+      display: 'flex',
+      justifyContent: 'center '
+    }
+  }
+});
 
 const AllUsers = () => {
   const dispatch = useDispatch();
@@ -23,8 +40,7 @@ const AllUsers = () => {
   }, [dispatch]);
 
   const handleDelete = async (id) => {
-    await axios
-      .get(`${server}/deactive-user/${id}`, { withCredentials: true })
+    await axios.get(`${server}/deactive-user/${id}`, { withCredentials: true })
       .then((res) => {
         toast.success(res.data.message);
       });
@@ -35,6 +51,7 @@ const AllUsers = () => {
     {
       field: "name",
       headerName: "name",
+      type: "text",
       minWidth: 50,
       flex: 0.4,
     },
@@ -45,7 +62,26 @@ const AllUsers = () => {
       minWidth: 250,
       flex: 0.7,
     },
-
+    {
+      field: "document",
+      headerName: "Document",
+      type: "text",
+      minWidth: 100,
+      flex: 0.5,
+      renderCell: (params) => {
+        return (
+          <>
+            <span>
+              ({
+                params.row.document ?
+                  <FcApproval size={20} />
+                  : <FcCancel size={20} />}
+              )
+            </span>
+          </>
+        );
+      },
+    },
     {
       field: "createdAt",
       headerName: "createdAt",
@@ -84,12 +120,11 @@ const AllUsers = () => {
         SNo: index + 1,
         name: item.name,
         email: item.email,
-        birthDate: item.birthDate,
+        document: item.verifiedUser,
         createdAt: moment(item.createdAt).format('DD/MM/YYYY'),
         joinedAt: item.createdAt.slice(0, 10),
       });
     });
-
   return (
     <div className="w-full flex justify-center pt-5">
       <div className="w-[97%]">
@@ -101,6 +136,8 @@ const AllUsers = () => {
             pageSize={10}
             disableSelectionOnClick
             autoHeight
+          // className={classes.header}
+
           />
         </div>
         {open && (

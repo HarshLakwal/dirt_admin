@@ -5,8 +5,12 @@ import { imageURL, server } from '../server'
 import Lottie from 'react-lottie'
 import Loader from '../Assests/animations/loader.json'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
 const PreviewVehical = () => {
+    const [open, setOpen] = useState(false)
+    const [data, setData] = useState(null)
+    const { id, category } = useParams()
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -15,9 +19,6 @@ const PreviewVehical = () => {
             preserveAspectRatio: "xMidYMid slice"
         }
     };
-    const [open, setOpen] = useState(false)
-    const [data, setData] = useState([])
-    const { id, category } = useParams()
     const getData = async () => {
         await axios.post(`${server}/get-vehicle/${id}`, { category: category })
             .then((res) => {
@@ -27,52 +28,66 @@ const PreviewVehical = () => {
     useEffect(() => {
         getData()
     }, [])
-    console.log(data)
+    const handleChange = event => {
+        const { name, value } = event.target
+        setData({ ...data, [name]: value })
+    };
+    const submit = async (e) => {
+        e.preventDefault()
+        await axios.post(`${server}/edit-vehicle/${id}`, { category: category, vehicalName: data.vehicalName, vehicalPrice: data.vehicalPrice })
+            .then((res) => {
+                toast.success(res.data.result);
+            });
+    }
     return (
         <div className="container mx-auto">
             <h3 className=" p-6 text-2xl text-start">Vehical Details</h3>
             <div className="flex justify-center items-center h-fit px-6">
                 <div className="w-full xl:w-full lg:w-full flex">
                     <div className="w-full lg:w-full bg-white p-5 rounded-lg lg:rounded-l-none  h-[27rem]">
-                        <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+                        <form onSubmit={submit} className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
                             <div className='flex items-center mb-6 border-2 w-[12rem] h-[11rem]'>
                                 {
-                                    data.length === 0 ? <Lottie
+                                    data == null ? <Lottie
                                         options={defaultOptions}
                                         height={50}
                                         width={50}
-                                    /> : <img src={`${imageURL}/${data[0].vehicalImg}`} alt="" />
+                                    /> : <img src={`${imageURL}/${data.vehicalImg}`} alt="" />
                                 }
-
                             </div>
-
                             <div className="mb-4 md:flex md:justify-between">
                                 <div className="w-5/12 mb-4 md:mr-2 md:mb-0">
                                     <label className="block mb-2 text-sm font-bold text-gray-700" for="firstName">
                                         Vehical Name
                                     </label>
-                                    <input style={{ textTransform: 'capitalize' }} name="vehicalName" value={data.length === 0 ? "" : data[0].vehicalName} className="w-full h-11 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" type="text" placeholder="Name" />
+                                    <input
+                                        style={{ textTransform: 'capitalize' }}
+                                        name="vehicalName"
+                                        value={data ? data.vehicalName : ""}
+                                        onChange={handleChange}
+                                        className="w-full h-11 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                        type="text"
+                                        placeholder="Vehical Name"
+                                        required
+                                    />
                                 </div>
                                 <div className="w-5/12 mb-4 md:mr-2 md:mb-0">
                                     <label className="block mb-2 text-sm font-bold text-gray-700" >
                                         Vehical Price
                                     </label>
-                                    <input name="vehicalPrice" value={data.length === 0 ? "" : data[0].vehicalPrice} className="w-full h-11 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" type="text" placeholder="Email" />
+                                    <input
+                                        name="vehicalPrice"
+                                        value={data ? data.vehicalPrice : ""}
+                                        onChange={handleChange}
+                                        className="w-full h-11 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                        type="number"
+                                        placeholder="Vehical Price"
+                                        required
+                                    />
                                 </div>
                             </div>
-                            {/* <div className="mb-4 md:flex md:justify-between">
-                                <div className="w-5/12 mb-4 md:mr-2 md:mb-0">
-                                    <label className="block mb-2 text-sm font-bold text-gray-700" for="firstName">
-                                        Vehical Price
-                                    </label>
-                                    <input name="Name" className="w-full h-11 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" type="text" placeholder="Name" />
-                                </div>
-                                
-                            </div> */}
-
-
                             <div className="mb-6 text-center">
-                                <button class="w-40 px-2 py-2 rounded-full bg-blue-500 font-bold text-white rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="button" onClick={() => setOpen(true)}>
+                                <button class="w-40 px-2 py-2 rounded-full bg-blue-500 font-bold text-white rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="submit" >
                                     Update
                                 </button>
                             </div>

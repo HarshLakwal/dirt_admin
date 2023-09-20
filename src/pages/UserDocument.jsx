@@ -48,9 +48,9 @@ const UserDocument = () => {
     return (
         <>
             <div className="container mx-auto">
-                <h3 className=" p-6 text-2xl text-start">User Details</h3>
+                <h3 className=" p-6 text-2xl text-start">User Document</h3>
                 {
-                    data === null ? "No data" :
+                    data === null ? <span style={{ display: 'flex', justifyContent: 'center' }}>Document not submitted</span> :
                         (<div className="flex justify-center items-center h-fit px-6">
                             <div className="w-full xl:w-full lg:w-full flex justify-between">
                                 <div className="flex flex-col items-center bg-white border border-gray-200 
@@ -80,7 +80,7 @@ const UserDocument = () => {
                                                 ID Proof
                                             </label>
                                             <select onChange={handleChange} class="form-select h-11 appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#07bc0c] focus:outline-none" aria-label="Select code" required>
-                                                <option selected>Select ID Proof</option>
+
                                                 <option>Adhar Card</option>
                                                 <option>PAN Card</option>
                                             </select>
