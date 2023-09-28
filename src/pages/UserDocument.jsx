@@ -44,7 +44,6 @@ const UserDocument = () => {
     const handleChange = (e) => {
         setSelectData(e.target.value)
     }
-    { console.log(data) }
     return (
         <>
             <div className="container mx-auto">
@@ -98,13 +97,31 @@ const UserDocument = () => {
                         </div>)
                 }
                 <div style={{ display: 'flex' }}>
-                    <button onClick={() => onVerify({ verify: true })} style={{ backgroundColor: "green" }} className={`${styles.button} text-white text-[18px] !h-[42px] m-auto mt-[4rem]`} type='button'  >
+
+                    <button
+                        onClick={() => onVerify({ verify: true })} style={{ backgroundColor: "green", }}
+                        className={!data ? `cursor-not-allowed ${styles.button} text-white text-[18px] !h-[42px] m-auto mt-[4rem]` : `cursor-pointer ${styles.button} text-white text-[18px] !h-[42px] m-auto mt-[4rem]`}
+                        type='button'
+                        disabled={!data}
+                    >
                         Verified
                     </button>
-                    <button onClick={() => onVerify({ reject: true })} style={{ backgroundColor: "red" }} className={`${styles.button} text-white text-[18px] !h-[42px] m-auto mt-[4rem]`} type='button'  >
+                    <button onClick={() => onVerify({ reject: true })}
+
+                        style={{ backgroundColor: "red" }}
+                        className={!data ? `cursor-not-allowed ${styles.button} text-white text-[18px] !h-[42px] m-auto mt-[4rem]` : `cursor-pointer ${styles.button} text-white text-[18px] !h-[42px] m-auto mt-[4rem]`}
+                        type='button'
+                        disabled={!data}
+
+                    >
                         Reject
                     </button>
-                    <button className={`${styles.button} text-white text-[18px] !h-[42px] m-auto mt-[4rem]`} type='button' onClick={() => setOpen(true)}  >
+                    <button
+                        className={!data ?`cursor-not-allowed ${styles.button} text-white text-[18px] !h-[42px] m-auto mt-[4rem]`:`cursor-pointer ${styles.button} text-white text-[18px] !h-[42px] m-auto mt-[4rem]`}
+                        type='button'
+                        onClick={() => setOpen(true)} 
+                        disabled={!data}
+                         >
                         Issue
                     </button>
                 </div>
